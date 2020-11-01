@@ -1,0 +1,80 @@
+.header {
+    background: #3D4F5D;
+}
+
+.content-right {
+    background: #fff;
+}
+
+@media (max-width: 767px) {
+    .container-fluid .header header {
+        margin: 3rem auto;
+        text-align: center;
+    }
+
+    .container-fluid .content {
+        padding: 1rem;
+    }
+}
+
+@media (min-width: 768px) {
+    html,
+    body,
+    #app,
+    #app .container-fluid,
+    #app .container-fluid .row,
+    #app .container-fluid .row > div {
+        height: 100%;
+        overflow-y: auto;
+    }
+
+    .container-fluid .header header {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        margin: 0 1rem;
+        text-align: right;
+    }
+
+    .container-fluid .content {
+        padding: 2rem;
+    }
+}
+
+.container-fluid .header header h1 {
+    font-size: 2rem;
+    color: #fff;
+}
+
+.container-fluid .header header h2 {
+    font-size: 1.5rem;
+    color: rgb(176, 202, 219);
+}
+
+.content-subhead {
+    text-transform: uppercase;
+    color: rgb(170, 170, 170);
+    font-size: 80%;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid rgb(238, 238, 238);
+    padding: 0.4em 0;
+}
+
+section a {
+    text-decoration: none;
+}
+
+.tag {
+    margin: 0 0.1em;
+    padding: 0.3em 1em;
+    color: #fff;
+    background: #999;
+    font-size: 80%;
+}
+
+.post-description {
+    font-family: Georgia, "Cambria", serif;
+    color: #444;
+    line-height: 1.8em;
+}
