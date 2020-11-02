@@ -11,6 +11,7 @@
     "axios": "^0.21.0",
     "bootstrap-vue": "^2.18.0",
     "core-js": "^3.6.5",
+    "lodash": "^4.17.20",
     "mavon-editor": "^2.9.0",
     "vue": "^2.6.11",
     "vue-router": "^3.4.8",

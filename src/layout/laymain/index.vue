@@ -1,8 +1,10 @@
 <template>
     <b-container fluid class="p-0">
-        <lay-header></lay-header>
+        <lay-header class="fixed-top"></lay-header>
+        <div style="padding-top: 56px; height: 100vh;">
+            <router-view></router-view>
+        </div>
 
-        <router-view></router-view>
     </b-container>
 </template>
 

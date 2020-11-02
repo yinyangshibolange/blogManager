@@ -3,7 +3,7 @@
         <div v-for="(user, index) in users" :key="index">
             <user
                     :isactive="cur_userid==user.id"
-                    imagesrc="https://img.wenhairu.com/images/2020/10/31/JFaro.jpg"
+                    imagesrc="https://img.wenhairu.com/images/2020/11/02/JY5h6.jpg"
                     :username="user.name"
                     @itemClick="userChoose(user.id)"></user>
         </div>

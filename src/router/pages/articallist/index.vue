@@ -9,7 +9,8 @@
         <b-list-group>
             <b-list-group-item v-for="(at, index) in articals" :key="index">
                 {{at.title}}
-                <b-button @click="toEdit(at.id)">编辑</b-button>
+                <b-button @click="toEdit(at.id)">编辑内容</b-button>
+                <b-button type="danger" @click="deleteArtical(at.id)">删除</b-button>
             </b-list-group-item>
         </b-list-group>
     </div>
@@ -34,24 +35,34 @@
         },
         methods: {
             ...mapActions({
-                getUserArticals: 'getUserArticals',
-                createArtical: 'createArtical'
+                _getUserArticals: 'getUserArticals',
+                _createArtical: 'createArtical',
+                _deleteArtical: 'deleteArtical'
             }),
             async createArtical(userid) {
-                await this.createArtical(userid)
+                await this._createArtical(userid)
                 this.$bvToast.toast('文章创建成功', {
                     title: '创建文章',
                     variant: 'success'
                 })
+                this._getUserArticals(this.userid)
             },
             toEdit(id) {
-                this.$router.push(`/artical/editor/${id}`)
+                this.$router.push(`/editor/${id}`)
+            },
+            async deleteArtical(articalid) {
+                await this._deleteArtical(articalid)
+                this.$bvToast.toast('文章删除成功', {
+                    title: '删除文章',
+                    variant: 'success'
+                })
+                this._getUserArticals(this.userid)
             }
         },
         mounted() {
             console.log(this.userid)
             this.$store.commit('setUserid', this.userid)
-            this.getUserArticals(this.userid)
+            this._getUserArticals(this.userid)
         }
     }
 </script>

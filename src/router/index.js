@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import artical from './pages/artical';
 import articallist from './pages/articallist'
 import articaldetail from './pages/articaldetail'
-import articaleditor from './pages/articaleditor'
+import editor from './pages/editor'
 
 import user from './pages/user'
 
@@ -21,12 +21,12 @@ const router = new VueRouter({
             path: 'detail/:articalid',
             name: 'articaldetail',
             component: articaldetail
-        }, {
-            path: 'editor/:articalid',
-            name: 'articaleditor',
-            props: true,
-            component: articaleditor
         }]
+    }, {
+        path: '/editor/:articalid',
+        name: 'articaleditor',
+        props: true,
+        component: editor
     }, {
         path: '/user',
         name: 'user',

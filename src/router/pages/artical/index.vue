@@ -1,5 +1,5 @@
 <template>
-    <b-container fluid>
+    <b-container fluid class="artical-view">
         <b-row>
             <b-col cols="0" md="4">
                 <users></users>
@@ -25,5 +25,9 @@
 </script>
 
 <style scoped>
-
+    .artical-view.container-fluid,
+    .artical-view.container-fluid .row,
+    .artical-view.container-fluid .row > div {
+        height: 100%;
+    }
 </style>

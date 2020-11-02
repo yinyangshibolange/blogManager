@@ -5,7 +5,7 @@ export const getArticalByid = async id => {
 }
 
 export const getArticalByUserid = async userid => {
-    return axios.get(`/api/artical?userid=${userid}`)
+    return axios.get(`/api/artical?user=${userid}`)
 }
 
 export const createArtical = async (userid) => {

@@ -9,7 +9,8 @@ const store = new Vuex.Store({
         artical_cur_userid: null,
         cur_articalid: null,
         users: [],
-        articals: []
+        articals: [],
+        editor_artical: null,
     },
     mutations: {
         userInit(state, users) {
@@ -26,7 +27,10 @@ const store = new Vuex.Store({
         },
         set_user_articals(state, articals) {
             state.articals = articals
-        }
+        },
+        set_artical(state, artical) {
+            state.editor_artical = artical
+        },
     },
     actions: {
         async userInit({commit}) {
@@ -36,13 +40,28 @@ const store = new Vuex.Store({
         },
         async createArtical({commit}, userid) {
             const resdata = await apis.createArtical(userid)
+            console.log(resdata)
             commit('setArticalid', resdata.data)
             return resdata.data
+        },
+        async getArtical({ commit }, articalid) {
+            const resdata = await apis.getArticalByid(articalid)
+            console.log(resdata.data[0].content)
+            commit('set_artical', resdata.data[0])
+            return resdata.data[0]
         },
         async getUserArticals({commit}, userid) {
             const resdata = await apis.getArticalByUserid(userid)
             console.log(resdata.data)
             commit('set_user_articals', resdata.data)
+            return resdata.data
+        },
+        async deleteArtical(context, articalid) {
+            const resdata = await apis.deleteArtical(articalid)
+            return resdata.data
+        },
+        async saveArticalContent(context, artical) {
+            const resdata = await apis.updateArtical({ content: artical.content, id: artical.id})
             return resdata.data
         }
     }
