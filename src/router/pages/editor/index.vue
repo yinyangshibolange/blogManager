@@ -1,13 +1,14 @@
 <template>
     <div class="p-3" v-if="_editor_artical">
         <h3>{{_editor_artical.title}}</h3>
-        <mavon-editor v-model="_editor_artical.content" @save="saveContent" @change="contentChange"/>
+        <mavon-editor ref="mavon" v-model="_editor_artical.content" @imgAdd="uploadimg" @save="saveContent" @change="contentChange"/>
     </div>
 </template>
 
 <script>
     import { mapActions, mapState } from 'vuex'
     import debounce from 'lodash/debounce'
+    import { upload } from '../../../apis/upload'
     export default {
         name: "index",
         data() {
@@ -26,6 +27,12 @@
               _getArtical: 'getArtical',
               _saveArticalContent: 'saveArticalContent'
           }),
+            async uploadimg(pos, $file){
+              console.log(pos)
+                const url = await upload($file)
+                console.log(url)
+                this.$refs.mavon.$img2Url(pos, url)
+            },
           async  saveContent() {
             await this._saveArticalContent(this._editor_artical)
               this.$bvToast.toast('保存成功', {
