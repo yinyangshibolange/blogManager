@@ -9,17 +9,16 @@ module.exports = {
                 pathRewrite: {
                     '^/api': '/api'
                 }
-
             },
             '/upload': {
-                target: 'http://up.imgapi.com/',
+                target: 'http://up.imgapi.com/', // 该接口来自 贴图库 - http://www.tietuku.com/
                 changeOrigin: true,
                 pathRewrite: {
-                    '^/api': '/'
+                    '^/upload': ''
                     //pathRewrite: {'^/api': '/'} 重写之后url为 http://192.168.1.16:8085/xxxx
                     //pathRewrite: {'^/api': '/api'} 重写之后url为 http://192.168.1.16:8085/api/xxxx
                 }
-            }
+            },
         }
 
     }

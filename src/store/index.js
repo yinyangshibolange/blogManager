@@ -44,7 +44,7 @@ const store = new Vuex.Store({
             commit('setArticalid', resdata.data)
             return resdata.data
         },
-        async getArtical({ commit }, articalid) {
+        async getArtical({commit}, articalid) {
             const resdata = await apis.getArticalByid(articalid)
             console.log(resdata.data[0].content)
             commit('set_artical', resdata.data[0])
@@ -61,7 +61,7 @@ const store = new Vuex.Store({
             return resdata.data
         },
         async saveArticalContent(context, artical) {
-            const resdata = await apis.updateArtical({ content: artical.content, id: artical.id})
+            const resdata = await apis.updateArtical({content: artical.content, id: artical.id})
             return resdata.data
         }
     }

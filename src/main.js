@@ -10,6 +10,7 @@ import 'mavon-editor/dist/css/index.css';
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'animate.css/animate.min.css'
 
 Vue.use(Router)
 Vue.use(BootstrapVue)
