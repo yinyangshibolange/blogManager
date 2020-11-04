@@ -8,13 +8,14 @@ export const getArticalByUserid = async userid => {
     return axios.get(`/api/artical?user=${userid}`)
 }
 
+export const getArticalByTag = async tag => {
+    return axios.get(`/api/artical?tag=${tag}`)
+}
+
 export const createArtical = async (userid) => {
     return axios.get(`/api/artical/${userid}`)
 }
 
-// export const addArtical = async artical => {
-//     return axios.post('/api/artical', artical)
-// }
 
 export const updateArtical = async artical => {
     return axios.put('/api/artical', artical)
