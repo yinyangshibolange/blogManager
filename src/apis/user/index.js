@@ -1,13 +1,13 @@
 import axios from 'axios'
 
-export const addUser = async (user) => {
-    return await axios.post('/api/user', user)
+export const register = (user) => {
+    return axios.post('/auth/register', user)
 }
 
-export const getUser = async (id) => {
-    return await axios.get(`/api/user?id=${id}`)
+export const getUser = (id) => {
+    return axios.get(`/api/user?id=${id}`)
 }
 
-export const updateUser = async (user) => {
-    return await axios.put('/api/user', user)
+export const updateUser = (user) => {
+    return axios.put('/api/user', user)
 }

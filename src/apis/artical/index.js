@@ -1,23 +1,23 @@
 import axios from 'axios'
 
-export const getArticalByid = async id => {
+export const getArticalByid = id => {
     return axios.get(`/api/artical?id=${id}`)
 }
 
-export const getArticalByUserid = async userid => {
+export const getArticalByUserid = userid => {
     return axios.get(`/api/artical?user=${userid}`)
 }
 
-export const getArticalByTag = async tag => {
+export const getArticalByTag = tag => {
     return axios.get(`/api/artical?tag=${tag}`)
 }
 
-export const createArtical = async (userid) => {
+export const createArtical = (userid) => {
     return axios.get(`/api/artical/${userid}`)
 }
 
 
-export const updateArtical = async artical => {
+export const updateArtical = artical => {
     return axios.put('/api/artical', artical)
 }
 
