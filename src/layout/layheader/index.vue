@@ -32,6 +32,14 @@
                         </template>
                         <b-dropdown-item >
                             <b-button v-b-modal.my-modal>登录</b-button>
+
+                            <b-modal id="my-modal">
+                                <form>
+                                    用户名<input type="text" v-model="username"/>
+                                    密码<input type="text" v-model="password"/>
+                                    <button @click="submit()">登录</button>
+                                </form>
+                            </b-modal>
                         </b-dropdown-item>
                         <b-dropdown-item >
                             <b-button @click="logout()">注销</b-button>
@@ -48,12 +56,24 @@
     export default {
         name: "index",
         data() {
-            return {}
+            return {
+                username: '',
+                password: '',
+            }
         },
         methods: {
             async logout() {
                 const resdata = await apis.logout()
                 console.log(resdata)
+            },
+            async submit() {
+                const user = {
+                    username: this.username,
+                    password: this.password
+                }
+                const resdata = await apis.login(user)
+                console.log(resdata)
+                alert(resdata)
             }
         }
     }
