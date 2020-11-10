@@ -30,8 +30,12 @@
                         <template v-slot:button-content>
                             <em>User</em>
                         </template>
-                        <b-dropdown-item href="#">Profile</b-dropdown-item>
-                        <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+                        <b-dropdown-item >
+                            <b-button v-b-modal.my-modal>登录</b-button>
+                        </b-dropdown-item>
+                        <b-dropdown-item >
+                            <b-button @click="logout()">注销</b-button>
+                        </b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
             </b-collapse>
@@ -40,8 +44,18 @@
 </template>
 
 <script>
+    import * as apis from '../../apis'
     export default {
-        name: "index"
+        name: "index",
+        data() {
+            return {}
+        },
+        methods: {
+            async logout() {
+                const resdata = await apis.logout()
+                console.log(resdata)
+            }
+        }
     }
 </script>
 

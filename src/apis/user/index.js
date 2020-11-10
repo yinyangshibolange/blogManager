@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const register = (user) => {
-    return axios.post('/auth/register', user)
+    return axios.post('/login/register', user)
 }
 
 export const getUser = (id) => {

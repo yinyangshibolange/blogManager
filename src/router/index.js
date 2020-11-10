@@ -4,6 +4,7 @@ import artical from './pages/artical';
 import articallist from './pages/articallist'
 import articaldetail from './pages/articaldetail'
 import editor from './pages/editor'
+import login from './pages/login'
 
 import user from './pages/user'
 
@@ -34,7 +35,11 @@ const router = new VueRouter({
     }, {
         path: '/user/:id',
         name: 'user'
-    },]
+    }, {
+        path: '/login',
+        name: 'login',
+        component: login
+    }]
 })
 
 export default router
