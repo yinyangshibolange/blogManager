@@ -1,14 +1,8 @@
 import axios from 'axios'
 
-export const reg = (user) => {
-    return axios.post('/xauth/reg', user)
-}
+export const reg = (user) => axios.post('/xauth/reg', user)
 
-export const login = (user) => {
-    return axios.post('/xauth/login', user)
-}
+export const login = (user) => axios.post('/xauth/login', user)
 
-export const logout = () => {
-    return axios.get('/xauth/logout')
-}
+export const logout = () => axios.get('/xauth/logout')
 

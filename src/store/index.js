@@ -50,6 +50,12 @@ const store = new Vuex.Store({
             commit('set_artical', resdata.data[0])
             return resdata.data[0]
         },
+        async getArticalsByTag({commit}, tag) {
+            const resdata = await apis.getArticalByTag(tag)
+            console.log(resdata.data)
+            commit('set_user_articals', resdata.data)
+            return resdata.data
+        },
         async getUserArticals({commit}, userid) {
             const resdata = await apis.getArticalByUserid(userid)
             console.log(resdata.data)
