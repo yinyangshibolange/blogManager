@@ -19,6 +19,15 @@ module.exports = {
                     '^/xauth': '/xauth'
                 }
             },
+            '/public': {                //这里最好有一个 /
+                target: 'http://localhost:3100',         // 服务器端接口地址
+                // ws: true,            //如果要代理 websockets，配置这个参数
+                // 如果是https接口，需要配置这个参数
+                changeOrigin: true,  //是否跨域
+                pathRewrite: {
+                    '^/public': '/public'
+                }
+            },
             '/upload': {
                 target: 'http://up.imgapi.com/', // 该接口来自 贴图库 - http://www.tietuku.com/
                 changeOrigin: true,

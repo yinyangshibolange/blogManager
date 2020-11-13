@@ -1,8 +1,8 @@
 import VueRouter from "vue-router";
 
 import artical from './pages/artical';
-import articallist from './pages/articallist'
-import articaldetail from './pages/articaldetail'
+import articallist from './pages/articalPages/articallist'
+import articaldetail from './pages/articalPages/articaldetail'
 import editor from './pages/editor'
 
 import user from './pages/user'

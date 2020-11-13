@@ -5,6 +5,7 @@ import Router from 'vue-router'
 import router from './router'
 import store from './store'
 
+import 'normalize.css/normalize.css'
 import mavonEditor from 'mavon-editor';
 import 'mavon-editor/dist/css/index.css';
 

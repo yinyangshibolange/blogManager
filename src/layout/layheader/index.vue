@@ -31,14 +31,16 @@
                             <em>User</em>
                         </template>
                         <b-dropdown-item >
-                            <b-button v-b-modal.my-modal>登录</b-button>
-
-                            <b-modal id="my-modal">
-                                <form>
-                                    用户名<input type="text" v-model="username"/>
-                                    密码<input type="text" v-model="password"/>
-                                    <button @click="submit()">登录</button>
-                                </form>
+                            <b-button @click="$store.commit('set_login_modal_show', true)">登录</b-button>
+                            <b-modal
+                                    id="my-modal"
+                                    :hide-header="true"
+                                    :hide-footer="true"
+                                    @hidden="$store.commit('set_login_modal_show', false)"
+                                    v-model="_login_modal_show">
+                                <div class="p-3">
+                                    <lay-auth></lay-auth>
+                                </div>
                             </b-modal>
                         </b-dropdown-item>
                         <b-dropdown-item >
@@ -53,29 +55,29 @@
 
 <script>
     import * as apis from '../../apis'
+    import layAuth from '../layauth'
+    import { mapState } from 'vuex'
     export default {
         name: "index",
         data() {
             return {
-                username: '',
-                password: '',
+
             }
+        },
+        computed: {
+          ...mapState({
+              _login_modal_show: 'login_modal_show',
+              _login_status: 'login_status',
+              _user: 'user'
+          })
         },
         methods: {
             async logout() {
                 const resdata = await apis.logout()
                 console.log(resdata)
             },
-            async submit() {
-                const user = {
-                    username: this.username,
-                    password: this.password
-                }
-                const resdata = await apis.login(user)
-                console.log(resdata)
-                alert(resdata)
-            }
-        }
+        },
+        components: { layAuth }
     }
 </script>
 

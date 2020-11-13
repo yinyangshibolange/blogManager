@@ -6,6 +6,9 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state: {
+        login_modal_show: false,
+        login_status: false,
+        user: null,
         artical_cur_userid: null,
         cur_articalid: null,
         users: [],
@@ -31,6 +34,15 @@ const store = new Vuex.Store({
         set_artical(state, artical) {
             state.editor_artical = artical
         },
+        set_login_status(state, status) {
+            state.login_status = status
+        },
+        set_login_modal_show(state, login_modal_show) {
+            state.login_modal_show = login_modal_show
+        },
+        set_user(state, user) {
+            state.user = user
+        }
     },
     actions: {
         async userInit({commit}) {
@@ -69,7 +81,15 @@ const store = new Vuex.Store({
         async saveArticalContent(context, artical) {
             const resdata = await apis.updateArtical({content: artical.content, id: artical.id})
             return resdata.data
-        }
+        },
+        async afterLogin({commit}) {
+            const resdata = await apis.getLoginUser()
+            console.log(resdata.data)
+            commit('set_user', resdata.data)
+            commit('set_login_status', true)
+            commit('set_login_modal_show', false)
+            return resdata.data
+        },
     }
 })
 
