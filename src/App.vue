@@ -1,17 +1,15 @@
 <template>
     <div id="app">
-        <lay-main></lay-main>
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
-    import layMain from './layout/laymain'
+
 
     export default {
         name: 'App',
-        components: {
-            layMain
-        },
+
 
     }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <b-container fluid>
+    <b-container fluid style="padding: 100px 400px">
         <b-form @submit="onLoginSubmit" @reset="onLoginReset" v-if="mode === 'login'">
             <b-form-group
                     id="input-group-1"
@@ -83,7 +83,7 @@
 </template>
 
 <script>
-    import * as apis from "../../apis";
+    import * as apis from "../../../apis";
     import { mapActions } from 'vuex'
 
     export default {
@@ -105,38 +105,64 @@
         },
         methods: {
             ...mapActions({
-                _afterLogin: 'afterLogin'
+                _login: 'login'
             }),
             async onLoginSubmit() {
                 const user = {
                     username: this.login.username,
                     password: this.login.password
                 }
-                const resdata = await apis.login(user)
-                await this._afterLogin()
-                console.log(resdata)
-                alert(resdata)
+                await this._login(user).catch(err => {
+                    this.$bvToast.toast(err, {
+                        title: '登录失败',
+                        variant: 'danger'
+                    })
+                })
             },
             onLoginReset() {
                 this.login.username = ''
                 this.login.password = ''
             },
             async onRegSubmit() {
+                if(this.reg.password !== this.reg.repeatPassword) {
+                    this.$bvToast.toast('两次密码输入不一致', {
+                        title: '确认密码',
+                        variant: 'danger'
+                    })
+                    return
+                }
                 const user = {
                     username: this.reg.username,
                     password: this.reg.password,
                     email: this.reg.email,
                 }
                 const resdata = await apis.reg(user)
-                console.log(resdata)
-                alert(resdata)
+                if(resdata.data.success) {
+                    this.login.username = this.reg.username
+                    this.login.password = this.reg.password
+                    await this.onLoginSubmit()
+                } else {
+                    this.$bvToast.toast(resdata.data.data, {
+                        title: '注册失败',
+                        variant: 'danger'
+                    })
+                }
             },
             onRegReset() {
                 this.reg.username = ''
                 this.reg.repeatPassword = ''
                 this.reg.password = ''
                 this.reg.email = ''
-            }
+            },
+
+        },
+        mounted() {
+            this.$store.dispatch('getUser')
+                .then((user) => {
+                    if(user) {
+                        this.$router.push('/lay/public')
+                    }
+                })
         }
     }
 </script>

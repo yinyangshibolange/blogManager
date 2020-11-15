@@ -1,8 +1,8 @@
 <template>
     <b-container fluid class="p-0">
         <lay-header
-            class="fixed-top"
-            v-show="headerShow"></lay-header>
+                class="fixed-top"
+                v-show="headerShow"></lay-header>
         <div style="padding-top: 56px; height: 100vh;">
             <router-view></router-view>
         </div>
@@ -11,8 +11,7 @@
 </template>
 
 <script>
-    import layHeader from '../layheader'
-
+    import layHeader from '../../../layout/layheader'
     export default {
         name: "index",
         data() {

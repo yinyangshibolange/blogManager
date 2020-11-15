@@ -1,18 +1,17 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
 import * as apis from '../apis'
+import router from '../router'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state: {
-        login_modal_show: false,
-        login_status: false,
         user: null,
-        artical_cur_userid: null,
-        cur_articalid: null,
         users: [],
         articals: [],
+        artical_cur_userid: null,
+        cur_articalid: null,
         editor_artical: null,
     },
     mutations: {
@@ -34,15 +33,9 @@ const store = new Vuex.Store({
         set_artical(state, artical) {
             state.editor_artical = artical
         },
-        set_login_status(state, status) {
-            state.login_status = status
-        },
-        set_login_modal_show(state, login_modal_show) {
-            state.login_modal_show = login_modal_show
-        },
         set_user(state, user) {
             state.user = user
-        }
+        },
     },
     actions: {
         async userInit({commit}) {
@@ -82,14 +75,26 @@ const store = new Vuex.Store({
             const resdata = await apis.updateArtical({content: artical.content, id: artical.id})
             return resdata.data
         },
-        async afterLogin({commit}) {
-            const resdata = await apis.getLoginUser()
-            console.log(resdata.data)
-            commit('set_user', resdata.data)
-            commit('set_login_status', true)
-            commit('set_login_modal_show', false)
-            return resdata.data
+        async getUser({commit}) {
+            const loginUser = await apis.getLoginUser()
+            commit('set_user', loginUser.data)
+            return loginUser.data
         },
+        async login({dispatch}, user) {
+            const loginResult = await apis.login(user)
+            if(loginResult.data.success === true) {
+                await dispatch('getUser')
+                router.push('/lay/public')
+            } else {
+                return Promise.reject(loginResult.data.data)
+            }
+        },
+        async logout({commit}) {
+            const resdata = await apis.logout()
+            commit('set_user', null)
+            router.push('/auth')
+            return resdata.data
+        }
     }
 })
 

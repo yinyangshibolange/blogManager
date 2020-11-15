@@ -31,7 +31,7 @@
             }),
             userChoose(userid) {
                 this.$store.commit('setUserid', userid)
-                this.$router.push(`/artical/list/${userid}`)
+                this.$router.push(`/lay/artical/list/${userid}`)
             }
         },
         mounted() {

@@ -48,7 +48,7 @@
                 this._getUserArticals(this.userid)
             },
             toEdit(id) {
-                this.$router.push(`/editor/${id}`)
+                this.$router.push(`/lay/editor/${id}`)
             },
             async deleteArtical(articalid) {
                 await this._deleteArtical(articalid)
