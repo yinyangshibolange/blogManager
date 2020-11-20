@@ -7,7 +7,7 @@
 
             <b-collapse id="nav-collapse" is-nav>
                 <b-navbar-nav>
-                    <b-nav-item href="#" to="/lay/artical">文章</b-nav-item>
+                    <b-nav-item href="#" to="/lay/artical/list">文章</b-nav-item>
                     <b-nav-item href="#" to="/lay/user">用户管理</b-nav-item>
                 </b-navbar-nav>
 

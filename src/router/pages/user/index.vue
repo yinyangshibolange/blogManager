@@ -12,7 +12,7 @@
 
 <script>
     import user from '../../components/user'
-    import {mapState, mapActions} from 'vuex'
+    import {mapState, } from 'vuex'
 
     export default {
         name: "index",
@@ -25,12 +25,12 @@
             user
         },
         methods: {
-            ...mapActions({
-                inituser: 'userInit'
-            })
+            // ...mapActions({
+            //     inituser: 'userInit'
+            // })
         },
         mounted() {
-            this.inituser()
+            // this.inituser()
         }
     }
 </script>

@@ -11,7 +11,8 @@ export const searchTag = (tagName) => axios.get(`/public/searchtag?keyword=${tag
 // 这里是创建并且添加标签
 export const createTag = (artical, name) => axios.post('/api/tagcloud', {artical, name})
 
-export const getArticalTags = (artical) => axios.get(`/public/tag?artical=${artical}`)
+// export const getArticalTags = (artical) => axios.get(`/public/tag?artical=${artical}`)
+export const getArticalTags = artical => axios.get(`/api/mytags?artical=${artical}`)
 
 // 这里是添加已存在的标签
 export const addArticalTag = (artical, tag) => axios.post('/api/tag', {

@@ -1,18 +1,22 @@
 <template>
     <div>
-        <header v-if="userid!==undefined&&userid!==null">
-            <b-button type="primary" @click="createArtical(userid)">
-                创建文章
-            </b-button>
-        </header>
-
-        <b-list-group>
-            <b-list-group-item v-for="(at, index) in articals" :key="index">
-                {{at.title}}
-                <b-button @click="toEdit(at.id)">编辑内容</b-button>
-                <b-button type="danger" @click="deleteArtical(at.id)">删除</b-button>
-            </b-list-group-item>
-        </b-list-group>
+<!--        <header>-->
+<!--            <a @click="createArtical()" class="text-primary">-->
+<!--                创建文章-->
+<!--            </a>-->
+<!--&lt;!&ndash;            <b-button type="primary" >&ndash;&gt;-->
+<!--&lt;!&ndash;                &ndash;&gt;-->
+<!--&lt;!&ndash;            </b-button>&ndash;&gt;-->
+<!--        </header>-->
+<!--        <b-list-group>-->
+<!--            <b-list-group-item v-for="(at, index) in _articals" :key="index">-->
+<!--                {{at.title}}-->
+<!--                <b-button @click="toEdit(at.id)">编辑内容</b-button>-->
+<!--                <router-link :to="'/lay/artical/detail/'+at.id">编辑</router-link>-->
+<!--                <b-button type="danger" @click="deleteArtical(at.id)">删除</b-button>-->
+<!--                <a>发布</a>-->
+<!--            </b-list-group-item>-->
+<!--        </b-list-group>-->
     </div>
 
 </template>
@@ -27,42 +31,51 @@
         },
         computed: {
             ...mapState({
-                articals: 'articals'
+                _articals: 'articals',
+                _cur_tag: 'cur_tag'
             })
         },
-        props: {
-            userid: String
-        },
+        // props: {
+        //     tag: String
+        // },
         methods: {
             ...mapActions({
-                _getUserArticals: 'getUserArticals',
+                _getMyArticals: 'getMyArticals',
                 _createArtical: 'createArtical',
                 _deleteArtical: 'deleteArtical'
             }),
-            async createArtical(userid) {
-                await this._createArtical(userid)
-                this.$bvToast.toast('文章创建成功', {
-                    title: '创建文章',
-                    variant: 'success'
+            async createArtical() {
+                const resdata = await this._createArtical({
+                    tag: this._cur_tag && this._cur_tag.id
                 })
-                this._getUserArticals(this.userid)
+                if(resdata) {
+                    this.$bvToast.toast('文章创建成功', {
+                        title: '创建文章',
+                        variant: 'success'
+                    })
+                    await this.initList()
+                }
             },
             toEdit(id) {
                 this.$router.push(`/lay/editor/${id}`)
             },
             async deleteArtical(articalid) {
-                await this._deleteArtical(articalid)
-                this.$bvToast.toast('文章删除成功', {
-                    title: '删除文章',
-                    variant: 'success'
-                })
-                this._getUserArticals(this.userid)
+                const resdata = await this._deleteArtical(articalid)
+                if(resdata) {
+                    this.$bvToast.toast('文章删除成功', {
+                        title: '删除文章',
+                        variant: 'success'
+                    })
+                    await this.initList()
+                }
+            },
+            async initList() {
+                // this.$store.commit('set_tag', null)
+                await this._getMyArticals()
             }
         },
         mounted() {
-            console.log(this.userid)
-            this.$store.commit('setUserid', this.userid)
-            this._getUserArticals(this.userid)
+            this.initList()
         }
     }
 </script>

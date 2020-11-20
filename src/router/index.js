@@ -35,21 +35,22 @@ const router = new VueRouter({
             name: 'artical',
             component: artical,
             children: [{
-                path: 'list/:userid',
+                path: 'list',
                 name: 'articallist',
-                props: true,
+                // props: true,
                 component: articallist
             }, {
                 path: 'detail/:articalid',
                 name: 'articaldetail',
+                props: true,
                 component: articaldetail
-            }]
-        }, {
-            path: 'editor/:articalid',
-            name: 'articaleditor',
-            props: true,
-            component: editor
-        }, {
+            }, {
+                path: 'editor/:articalid',
+                name: 'articaleditor',
+                props: true,
+                component: editor
+            },]
+        },  {
             path: 'user',
             name: 'user',
             component: user

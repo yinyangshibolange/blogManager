@@ -1,6 +1,6 @@
 <template>
     <div class="p-3" v-if="_editor_artical">
-        <h3>{{_editor_artical.title}}</h3>
+<!--        <h3>{{_editor_artical.title}}</h3>-->
         <mavon-editor ref="mavon" v-model="_editor_artical.content" @imgAdd="uploadimg" @save="saveContent"
                       @change="contentChange"/>
     </div>
@@ -26,12 +26,12 @@
         },
         methods: {
             ...mapActions({
-                _getArtical: 'getArtical',
+                // _getArtical: 'getArtical',
                 _saveArticalContent: 'saveArticalContent'
             }),
+            // debounce,
             async uploadimg(pos, $file) {
                 const resdata = await upload($file)
-                console.log(resdata.data)
                 this.$refs.mavon.$img2Url(pos, resdata.data.linkurl)
             },
             async saveContent() {
@@ -43,6 +43,7 @@
             },
             // contentChange: debounce(this.timeoutSave, 200),
             timeoutSave() {
+                console.log('timeoutSave')
                 if (this.timer) {
                     clearTimeout(this.timer)
                     this.timer = null
@@ -62,11 +63,11 @@
                 clearTimeout(this.timer)
                 this.timer = null
             }
-            this.$store.commit('set_artical', null)
+            this.contentChange = undefined
+            this.$store.commit('set_editor_artical', null)
         },
-        mounted() {
+        created() {
             this.contentChange = debounce(this.timeoutSave, 200)
-            this._getArtical(this.articalid)
         }
     }
 </script>
